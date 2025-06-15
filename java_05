@@ -1,0 +1,22 @@
+// https://leetcode.com/problems/shuffle-the-array
+
+class Solution {
+    public int[] shuffle(int[] nums, int n) {
+
+        int[] ans = new int[nums.length];
+
+        int a = 0;
+        int b = (nums.length/2) + 1;
+
+        for(int i = 0; i < nums.length; i+=2){
+                if(b <= nums.length){
+                    ans[i] = nums[a];
+                    ans[i+1] = nums[b-1];
+                    a++;
+                    b++;
+                }
+        }
+        
+        return ans;
+    }
+}
