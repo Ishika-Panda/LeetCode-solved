@@ -1,0 +1,35 @@
+// https://leetcode.com/problems/check-if-the-sentence-is-pangram
+
+class Solution {
+    public boolean checkIfPangram(String sentence) {
+
+        /* 1st approach: --> using boolean array:
+
+        boolean[] arr = new boolean[26];
+
+        for(int i = 0; i < sentence.length(); i++){
+            if(sentence.charAt(i) >= 'a' && sentence.charAt(i) <= 'z'){
+                arr[sentence.charAt(i) - 'a'] = true;
+            }
+        }
+
+        for (boolean i : arr) {
+            if (i == false)
+               return false;
+        }
+        return true;
+    }
+    */
+
+    // 2nd approach:
+    if(sentence.length() < 26){
+        return false;
+    }
+    for(char i = 'a'; i <= 'z'; i++){
+        if(sentence.indexOf(i) == -1){    // check if the character is present in the String
+            return false;
+        }
+    }
+    return true;
+    }
+}
