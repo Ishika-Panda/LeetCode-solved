@@ -1,0 +1,24 @@
+// https://leetcode.com/problems/kids-with-the-greatest-number-of-candies
+
+class Solution {
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        ArrayList<Boolean> result = new ArrayList<>();
+
+        for(int i = 0; i < candies.length; i++){
+            boolean ans = candies[i] + extraCandies >= Max(candies);
+            result.add(ans);
+        }
+
+        return result;
+    }
+
+    int Max(int[] a){
+        int i = a[0];
+        for(int j = 1; j < a.length; j++){
+            if(a[j] > i){
+                i = a[j];
+            }
+        }
+        return i;
+    }
+}
