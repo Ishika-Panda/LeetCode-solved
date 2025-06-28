@@ -1,0 +1,112 @@
+// https://leetcode.com/problems/find-the-duplicate-number
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+
+        // Floyd's Cycle Detection Algorithm:
+
+        // phase 1:
+        
+        int slow = 0;
+        int fast = 0;
+
+        do{
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+        while(slow != fast);
+
+        // phase 2:
+
+        slow = 0;
+
+        while(slow != fast){
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;   // slow = fast
+    }
+}
+
+/* NOTE: Initial solution:  
+
+❌ PROBLEM:  It violates problem constraints Must not modify the array (i.e., no sorting or changing values). Bubble sort modifies the original array.
+
+// Approach 1: Bubble sort + Binary search
+
+```
+class Solution {
+    public int findDuplicate(int[] nums) {
+        
+        int i = 0;
+        int j = nums.length - 1;
+
+        if(nums.length < 0){
+            return -1;
+        }
+        else if(nums.length == 2 && nums[0] == nums[1]){
+            return nums[0];
+        }
+        else if(nums[0] == nums[1]){
+            return nums[0];
+        }
+        else if(nums[nums.length - 1] == nums[nums.length - 2]){
+            return nums[nums.length - 1];
+        }
+
+        bubbleSort(nums);
+
+        while (i <= j) {
+
+            int mid = i + (j - i)/2;
+
+            if ((nums[mid] == nums[mid-1]) || (nums[mid] == nums[mid+1]) && (mid <= j) && (mid >= i)){
+                return nums[mid];
+            }
+
+            else{
+                i++;
+                j--;
+            }
+        }
+        return -1;
+
+    }
+
+    void bubbleSort(int[] arr){
+            int i, j, temp;
+            int n = arr.length;
+            boolean swapped;
+            for (i = 0; i < n - 1; i++) {
+                swapped = false;
+                for (j = 0; j < n - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                        swapped = true;
+                    }
+                }
+
+                if (swapped == false)
+                    break;
+            }
+    }
+}
+```
+
+// Approach 2: Array-Sort class + Binary search (If sorting was allowed, this approach whould be efficient)
+
+``` 
+      Arrays.sort(nums);
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] == nums[i - 1]) {
+                return nums[i];
+            }
+        }
+
+        return -1;
+```
+
+*/
+
