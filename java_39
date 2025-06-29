@@ -1,0 +1,19 @@
+// https://leetcode.com/problems/kth-missing-positive-number
+
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+
+        int missing = 0;
+
+        for(int i = 0; i < arr.length; i++){
+            missing = arr[i] - (i + 1);   // number of missing elements till index i
+
+            if(missing >= k){
+                return arr[i] - (missing - k + 1);   // missing element at kth index
+            } 
+        }
+
+        return arr[arr.length - 1] + (k - missing);   // kth missing number comes after the last array element
+        
+    }
+}
